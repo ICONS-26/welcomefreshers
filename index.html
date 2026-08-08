@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICONS — Welcome, NSSCE Palakkad Juniors</title>
+<meta name="theme-color" content="#1A0F26">
+<meta name="description" content="An ultra-modern, cinematic tech portal for NSSCE Palakkad Instrumentation & Control Engineering (ICE) juniors built by ICONS seniors.">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:title" content="ICONS — Welcome, NSSCE Palakkad Juniors">
+<meta property="og:description" content="Interactive 3D tech portal, games, Insta story badge builder, freshers FAQ & study resources.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Particle Canvas & Confetti -->
+<canvas id="heroCanvas"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-mark">ICONS</div>
+  <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
+  <div class="loader-pct" id="loaderPct">0% — WARMING UP THE WELCOME</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">ICONS</div>
+  <div class="nav-right">
+    <div class="xp-pill" id="xpPill" title="Your total XP earned">⚡ <span id="xpVal">0</span> XP · <span id="rankVal">Freshman</span></div>
+    <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Theme">🌓</button>
+    <button class="icon-btn" id="soundToggleBtn" aria-label="Toggle Sound FX">🔊</button>
+    <a href="#games" class="btn ghost small">Tech Arena</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">NSSCE Palakkad · ICE Department</div>
+    <h1 class="hero-title">Welcome, Juniors of <span class="accent">ICONS</span></h1>
+    <p class="hero-tagline">Your seniors at NSS College of Engineering, Palakkad built this interactive portal just for you. Play games, create your custom welcome badge, and join the family.</p>
+
+    <div class="hero-actions">
+      <a href="#welcome" class="btn">Enter the Club ↓</a>
+      <a href="#badgeBuilder" class="btn gold">Get Insta Story Badge 📸</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore ↓</div>
+</header>
+
+<!-- WELCOME MESSAGE -->
+<section class="section" id="welcome">
+  <div class="eyebrow reveal">A note from us</div>
+  <div class="welcome-card reveal delay-1" style="margin-top:16px;">
+    <p>Dear Juniors, welcome to NSS College of Engineering, Palakkad — and to the ICONS family!</p>
+    <p>Instrumentation &amp; Control Engineering (ICE) isn't just a discipline of circuits, sensors, and PID loops. It's where you'll pull your first late-night lab prep, build your first working prototype, and realize the peers beside you have become lifelong friends. ICONS exists so every step of your journey feels inspiring, supported, and fun.</p>
+    <div class="welcome-sign">— With love &amp; respect, your ICONS seniors</div>
+  </div>
+</section>
+
+<!-- SURPRISE REVEAL -->
+<section class="section surprise-wrap">
+  <div class="eyebrow reveal">A little something for you</div>
+  <h2 class="section-title reveal delay-1">Your first surprise</h2>
+  <p class="section-sub reveal delay-1" style="margin:0 auto;">Tap the card below for your official welcome note.</p>
+  <div class="surprise-card reveal delay-2" id="surpriseCard" tabindex="0" role="button" aria-label="Tap to reveal surprise message">
+    <div class="surprise-inner">
+      <div class="surprise-face surprise-front">
+        <div class="icon">🎁</div>
+        <div class="label">Tap to reveal</div>
+        <div class="hint">ICONS only</div>
+      </div>
+      <div class="surprise-face surprise-back">
+        <div class="icon">✨</div>
+        <div class="label">You belong here!</div>
+        <div class="sub">Whatever lab, exam, or project comes your way — we've got your back 100%. Welcome home!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="values reveal delay-3">
+    <div class="value-card"><div class="num">01</div><h3>Curiosity</h3><p>We ask "why" until every sensor and control loop makes sense.</p></div>
+    <div class="value-card"><div class="num">02</div><h3>Unity</h3><p>No engineer debugs or builds alone in this department.</p></div>
+    <div class="value-card"><div class="num">03</div><h3>Confidence</h3><p>Built one small win, lab experiment, and code commit at a time.</p></div>
+    <div class="value-card"><div class="num">04</div><h3>Innovation</h3><p>All ideas welcome — especially the wild, half-finished ones!</p></div>
+  </div>
+</section>
+
+<!-- INSTA STORY BADGE BUILDER -->
+<section class="section" id="badgeBuilder">
+  <div class="eyebrow reveal">Personalized Badge</div>
+  <h2 class="section-title reveal delay-1">Create your Freshers Story Badge</h2>
+  <p class="section-sub reveal delay-1">Customize your official ICONS Freshers card and download it to share on your Instagram stories!</p>
+
+  <div class="badge-builder-grid reveal delay-2">
+    <div class="badge-form">
+      <div class="field">
+        <label for="badgeName">Your Name</label>
+        <input type="text" id="badgeName" placeholder="e.g. Rahul Sharma" value="NSSCE Fresher" maxlength="24">
+      </div>
+      <div class="field">
+        <label for="badgeBatch">Batch / Class</label>
+        <select id="badgeBatch">
+          <option value="ICE 2026-30">ICE Batch 2026 - 2030</option>
+          <option value="ICE 2025-29">ICE Batch 2025 - 2029</option>
+          <option value="Instrumentation & Control">Instrumentation &amp; Control</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="badgeTheme">Badge Theme</label>
+        <select id="badgeTheme">
+          <option value="gold">Neon Gold &amp; Aubergine</option>
+          <option value="coral">Cyber Coral &amp; Crimson</option>
+          <option value="emerald">Electric Emerald &amp; Dark</option>
+          <option value="solar">Solar Gold &amp; Light</option>
+        </select>
+      </div>
+      <button class="btn gold" id="downloadBadgeBtn" style="width:100%; margin-top:10px;">Download Story Badge 📲</button>
+    </div>
+
+    <div class="badge-preview-box">
+      <canvas id="badgeCanvas" width="600" height="840"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES HUB & TECH ARENA -->
+<section class="section" id="games">
+  <div class="eyebrow reveal">ICONS Tech Arena</div>
+  <h2 class="section-title reveal delay-1">Play &amp; earn ICONS XP</h2>
+  <p class="section-sub reveal delay-1">Challenge our AI, test your memory, repeat circuit patterns, or tackle tech trivia to level up your XP badge!</p>
+
+  <div class="game-select reveal delay-2">
+    <button class="game-pill active" data-game="ttt">✖️⭕ Tic-Tac-Toe</button>
+    <button class="game-pill" data-game="memory">🧠 Memory Match</button>
+    <button class="game-pill" data-game="simon">💡 Simon Circuit</button>
+    <button class="game-pill" data-game="quiz">❓ Quick Quiz</button>
+  </div>
+
+  <!-- TIC TAC TOE -->
+  <div class="game-panel active" id="panel-ttt">
+    <div class="game-grid-layout">
+      <div class="game-info">
+        <h3>Beat the ICONS AI</h3>
+        <p>You're <strong style="color:var(--coral)">X</strong>, the club bot is <strong style="color:var(--gold)">O</strong>. Win = +15 XP, draw = +5 XP.</p>
+        <div class="scoreboard">
+          <div class="score"><div class="n" id="scoreYou">0</div><div class="l">You</div></div>
+          <div class="score"><div class="n" id="scoreDraw">0</div><div class="l">Draws</div></div>
+          <div class="score"><div class="n" id="scoreAI">0</div><div class="l">Icons AI</div></div>
+        </div>
+        <button class="btn ghost small" id="resetGame">Reset match</button>
+      </div>
+      <div>
+        <div class="board" id="board"></div>
+        <div class="game-status" id="gameStatus">Your turn — tap a cell</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMORY MATCH -->
+  <div class="game-panel" id="panel-memory">
+    <div class="game-grid-layout">
+      <div class="game-info">
+        <h3>Memory Match</h3>
+        <p>Flip cards to find all 8 engineering pairs. Fewer moves earn higher XP payouts (up to +50 XP)!</p>
+        <div class="scoreboard">
+          <div class="score"><div class="n" id="memMoves">0</div><div class="l">Moves</div></div>
+          <div class="score"><div class="n" id="memPairs">0/8</div><div class="l">Pairs</div></div>
+        </div>
+        <button class="btn ghost small" id="resetMemory">New shuffle</button>
+      </div>
+      <div>
+        <div class="memory-grid" id="memoryGrid"></div>
+        <div class="game-status" id="memStatus">Find the matching pairs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMON CIRCUIT (PATTERN MEMORY) -->
+  <div class="game-panel" id="panel-simon">
+    <div class="game-grid-layout">
+      <div class="game-info">
+        <h3>Simon Circuit</h3>
+        <p>Repeat the glowing LED circuit pattern sequence. Reach step 5 for +25 XP!</p>
+        <div class="scoreboard">
+          <div class="score"><div class="n" id="simonScore">0</div><div class="l">Level</div></div>
+          <div class="score"><div class="n" id="simonBest">0</div><div class="l">Best</div></div>
+        </div>
+        <button class="btn ghost small" id="startSimon">Start Circuit</button>
+      </div>
+      <div>
+        <div class="simon-grid">
+          <div class="simon-pad simon-red" data-pad="0">🔴</div>
+          <div class="simon-pad simon-blue" data-pad="1">🔵</div>
+          <div class="simon-pad simon-green" data-pad="2">🟢</div>
+          <div class="simon-pad simon-yellow" data-pad="3">🟡</div>
+        </div>
+        <div class="game-status" id="simonStatus">Press 'Start Circuit' to begin</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="game-panel" id="panel-quiz">
+    <div class="game-grid-layout">
+      <div class="game-info">
+        <h3>Quick Tech Quiz</h3>
+        <p>5 quick questions on ICE, circuits, and control systems. Earn +10 XP for every correct answer!</p>
+        <div class="scoreboard">
+          <div class="score"><div class="n" id="quizScore">0</div><div class="l">Correct</div></div>
+          <div class="score"><div class="n" id="quizTotal">5</div><div class="l">Questions</div></div>
+        </div>
+        <button class="btn ghost small" id="resetQuiz">Restart quiz</button>
+      </div>
+      <div>
+        <div class="quiz-progress" id="quizProgress">Question 1 of 5</div>
+        <div class="quiz-q" id="quizQ">Loading question…</div>
+        <div class="quiz-options" id="quizOptions"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRESHERS FAQ ACCORDION -->
+<section class="section">
+  <div class="eyebrow reveal">Got questions?</div>
+  <h2 class="section-title reveal delay-1">Freshers FAQ &amp; Campus Guide</h2>
+  <p class="section-sub reveal delay-1">Everything you wanted to ask about NSSCE ICE department, labs, and student life.</p>
+
+  <div class="faq-list reveal delay-2" id="faqList" style="margin-top:24px;">
+    <div class="faq-item">
+      <div class="faq-q">What does ICE stand for and what do we learn here?</div>
+      <div class="faq-a">Instrumentation &amp; Control Engineering (ICE) focuses on automation, sensors, process control, robotics, embedded systems, and industrial signal processing. You'll master both hardware and software!</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are lab exams difficult in the first year?</div>
+      <div class="faq-a">Not at all! As long as you understand basic circuit logic and complete your lab record regularly, lab exams are straightforward. Plus, seniors are always around to help you review before viva!</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What software tools should I install on my laptop?</div>
+      <div class="faq-a">We recommend installing VS Code, Python 3, MATLAB / GNU Octave, Arduino IDE, and Proteus / LTSpice for circuit simulations.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How can I join workshops and events by ICONS?</div>
+      <div class="faq-a">Follow our official Instagram @icons.nssce and join our WhatsApp announcements group to stay updated. All workshops (Arduino, Web Dev, IoT, AI) are open to all ICE juniors!</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is ragging allowed anywhere on campus?</div>
+      <div class="faq-a">Strictly ZERO tolerance! NSSCE Palakkad is a 100% anti-ragging campus. Seniors are here to guide, mentor, and support you as family.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ICE RESOURCE HUB -->
+<section class="section">
+  <div class="eyebrow reveal">Academic Utilities</div>
+  <h2 class="section-title reveal delay-1">ICE Resource Hub</h2>
+  <p class="section-sub reveal delay-1">Handpicked study guides, syllabus links, and tools curated by seniors.</p>
+
+  <div class="resource-grid reveal delay-2">
+    <div class="res-card">
+      <div>
+        <div class="res-icon">📘</div>
+        <h3>KTU ICE Syllabus</h3>
+        <p>Curriculum guidelines, course outcomes, and semester module breakdowns.</p>
+      </div>
+      <a class="btn ghost small" href="files/syllabus_first_years.pdf" download="ICE_Syllabus_First_Year.pdf">View Syllabus</a>
+    </div>
+    <div class="res-card">
+      <div>
+        <div class="res-icon">⚡</div>
+        <h3>Simulation Tools</h3>
+        <p>Free tools like Tinkercad, LTSpice, and Falstad circuit simulator for practice.</p>
+      </div>
+      <a class="btn ghost small" href="simulation-tools.html">Try Tools</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="eyebrow reveal">In their words</div>
+  <h2 class="section-title reveal delay-1">What seniors say</h2>
+  <p class="section-sub reveal delay-1">Real advice and memories from your NSSCE Palakkad ICE seniors.</p>
+  <div class="testimonial-wrap reveal delay-2">
+    <div class="testimonial active">
+      <div class="t-quote">Is ICE really as tough as people say?</div>
+      <div class="t-person"><div class="t-avatar">A</div><div><div class="t-name">A junior, probably</div><div class="t-role">asked every single batch</div></div></div>
+    </div>
+    <div class="testimonial">
+      <div class="t-quote">Only in the first couple of weeks! Once you get used to lab setups and circuit theory, it becomes deeply rewarding.</div>
+      <div class="t-person"><div class="t-avatar">S</div><div><div class="t-name">A senior, definitely</div><div class="t-role">3rd Year, ICE</div></div></div>
+    </div>
+    <div class="testimonial">
+      <div class="t-quote">The bond in the ICE department is unbeatable. Seniors and juniors build real projects together.</div>
+      <div class="t-person"><div class="t-avatar">M</div><div><div class="t-name">ICONS Member</div><div class="t-role">Final Year</div></div></div>
+    </div>
+    <div class="t-dots" id="tDots"></div>
+  </div>
+</section>
+
+<!-- DIGITAL MEMORY WALL -->
+<section class="section">
+  <div class="eyebrow reveal">Digital Memory Wall</div>
+  <h2 class="section-title reveal delay-1">Photos &amp; Moments</h2>
+  <div class="gallery-grid reveal delay-2" id="galleryGrid"></div>
+</section>
+
+<!-- RULES & CONDUCT -->
+<section class="section">
+  <div class="rules-card reveal">
+    <div class="eyebrow">Welcome Juniors</div>
+    <h2 class="section-title" style="font-size:clamp(1.6rem, 4vw, 2.3rem);">A few house rules, said kindly</h2>
+    <div class="rules-grid">
+      <div class="rule"><span class="ic">🚫</span><div><strong>No Substances</strong><span>Drugs, alcohol, and smoking are strictly forbidden — zero exceptions.</span></div></div>
+      <div class="rule"><span class="ic">🤝</span><div><strong>Ragging-Free Campus</strong><span>Every senior here is your friend and guide. No intimidation ever.</span></div></div>
+      <div class="rule"><span class="ic">💛</span><div><strong>Mutual Respect</strong><span>Kindness, inclusivity, and encouragement for all students.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLLOW US -->
+<section class="section" style="text-align:center; padding-top:60px; padding-bottom:60px;">
+  <div class="eyebrow reveal">Stay Connected</div>
+  <h2 class="section-title reveal delay-1">Follow us on Instagram</h2>
+  <p class="section-sub reveal delay-1" style="margin:0 auto;">Event announcements, workshop updates, and campus reels posted daily.</p>
+  <div class="social-strip reveal delay-2">
+    <a class="social-card" href="https://instagram.com/icons.nssce" target="_blank" rel="noopener">
+      <div class="social-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="white"/></svg></div>
+      <div class="social-text"><div class="social-label">ICONS</div><div class="social-handle">@icons.nssce</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta reveal">
+  <h2 class="section-title" style="font-size:clamp(2.1rem, 6vw, 3.4rem);">Welcome to NSSCE Palakkad.<br>Welcome to ICONS.</h2>
+  <p class="section-sub" style="margin:16px auto 32px;">Let's build memories, technical skills, and a bright engineering future together.</p>
+  <a href="#games" class="btn">Play a Game &amp; Earn XP</a>
+</section>
+
+<!-- LIGHTBOX DIALOG -->
+<dialog id="lightboxDialog">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="closeLightboxBtn" aria-label="Close dialog">&times;</button>
+    <div class="lightbox-media" id="lightboxEmoji">🎬</div>
+    <div class="lightbox-title" id="lightboxTitle">Event Title</div>
+    <div class="lightbox-desc" id="lightboxDesc">Description goes here...</div>
+  </div>
+</dialog>
+
+<footer>
+  ICONS · NSS College of Engineering, Palakkad · Instrumentation &amp; Control Engineering<br>
+  <a href="https://instagram.com/icons.nssce" target="_blank" rel="noopener" style="color:var(--gold);">@icons.nssce</a>
+</footer>
+
+<div id="toast"></div>
+
+<script src="index.js"></script>
+</body>
+</html>
