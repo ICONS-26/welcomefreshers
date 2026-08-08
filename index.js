@@ -701,42 +701,76 @@
   }
   resetTimer();
 
-  /* ============ LIGHTBOX MODAL & MEDIA ============ */
-  var lightboxDialog = document.getElementById('lightboxDialog');
-  var lightboxEmoji = document.getElementById('lightboxEmoji');
-  var lightboxTitle = document.getElementById('lightboxTitle');
-  var lightboxDesc = document.getElementById('lightboxDesc');
-  var closeLightboxBtn = document.getElementById('closeLightboxBtn');
-
-  function openLightbox(emoji, title, desc){
-    lightboxEmoji.textContent = emoji;
-    lightboxTitle.textContent = title;
-    lightboxDesc.textContent = desc;
-    lightboxDialog.showModal();
-    playTone(550, 'triangle', 0.15);
-  }
-
-  closeLightboxBtn.addEventListener('click', function(){ lightboxDialog.close(); });
-  lightboxDialog.addEventListener('click', function(e){
-    if(e.target === lightboxDialog) lightboxDialog.close();
-  });
-
-  /* ============ GALLERY POPULATION ============ */
-  var photos = [
-    {label:'Campus Vibes', emoji:'📸', desc:'Sunny afternoons outside the ICE department block.'},
-    {label:'Squad Goals', emoji:'👥', desc:'Senior-junior study circles and project brainstorms.'},
-    {label:'Best Memories', emoji:'💫', desc:'Group photos after winning the college inter-department trophy.'},
-    {label:'Fest Energy', emoji:'🎊', desc:'Techno-cultural fest exhibits designed by ICONS members.'},
-    {label:'Lab Hours', emoji:'⚙️', desc:'Assembling sensors and tuning PID controllers.'},
-    {label:'Team Spirit', emoji:'🔥', desc:'Cheering together during annual sports day.'}
+  /* ============ PHOTO SLIDESHOW ============ */
+  var slidePhotos = [
+    {src: 'img/achievements/Icons panel_20260806_120917_0000.png', tag: 'Achievements'},
+    {src: 'img/achievements/indumiss.jpeg', tag: 'Achievements'},
+    {src: 'img/achievements/iv25.jpg', tag: 'Achievements'},
+    {src: 'img/achievements/logomaking.jpg', tag: 'Achievements'},
+    {src: 'img/achievements/placement.jpeg', tag: 'Achievements'},
+    {src: 'img/achievements/quizwinners.jpeg', tag: 'Achievements'},
+    {src: 'img/achievements/spiwebinar.jpg', tag: 'Achievements'},
+    {src: 'img/druva/beyondthepulseimage.jpg', tag: 'Druva'},
+    {src: 'img/druva/beyondthepulseposter.jpg', tag: 'Druva'},
+    {src: 'img/druva/brainbattle.jpg', tag: 'Druva'},
+    {src: 'img/druva/druvatalk.jpg', tag: 'Druva'},
+    {src: 'img/druva/druvateam25.jpg', tag: 'Druva'},
+    {src: 'img/druva/iconscupposter.jpg', tag: 'Druva'},
+    {src: 'img/druva/iconscupwinners.jpeg', tag: 'Druva'},
+    {src: 'img/druva/microcontroller_workshop.jpg', tag: 'Druva'},
+    {src: 'img/druva/rudraimage.jpg', tag: 'Druva'},
+    {src: 'img/druva/rudraposter.jpg', tag: 'Druva'}
   ];
-  var galleryGrid = document.getElementById('galleryGrid');
-  photos.forEach(function(p){
-    var item = document.createElement('div');
-    item.className = 'gallery-item';
-    item.innerHTML = p.emoji + '<span>' + p.label + '</span>';
-    item.addEventListener('click', function(){ openLightbox(p.emoji, p.label, p.desc); });
-    galleryGrid.appendChild(item);
+
+  var slideshowTrack = document.getElementById('slideshowTrack');
+  var slideDotsWrap = document.getElementById('slideDots');
+  var slidePrevBtn = document.getElementById('slidePrev');
+  var slideNextBtn = document.getElementById('slideNext');
+  var slideIndex = 0, slideTimer;
+
+  slidePhotos.forEach(function(p, i){
+    var slide = document.createElement('div');
+    slide.className = 'slide';
+
+    var tag = document.createElement('span');
+    tag.className = 'slide-tag';
+    tag.textContent = p.tag;
+
+    var img = document.createElement('img');
+    img.src = p.src;
+    img.alt = p.tag + ' photo';
+    img.loading = 'lazy';
+
+    slide.appendChild(tag);
+    slide.appendChild(img);
+    slideshowTrack.appendChild(slide);
+
+    var dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
+    dot.addEventListener('click', function(){ showSlide(i); resetSlideTimer(); });
+    slideDotsWrap.appendChild(dot);
   });
+
+  var slideEls = slideshowTrack.querySelectorAll('.slide');
+  var slideDots = slideDotsWrap.querySelectorAll('.slide-dot');
+
+  function showSlide(i){
+    slideIndex = (i + slideEls.length) % slideEls.length;
+    slideEls.forEach(function(s, idx){
+      var rel = (idx - slideIndex + slideEls.length) % slideEls.length;
+      s.classList.toggle('current', rel === 0);
+      s.classList.toggle('next', rel === 1);
+    });
+    slideDots.forEach(function(d, idx){ d.classList.toggle('active', idx === slideIndex); });
+  }
+  showSlide(0);
+  function resetSlideTimer(){
+    clearInterval(slideTimer);
+    slideTimer = setInterval(function(){ showSlide(slideIndex + 1); }, 4000);
+  }
+  slidePrevBtn.addEventListener('click', function(){ showSlide(slideIndex - 1); resetSlideTimer(); playTone(350, 'sine', 0.08); });
+  slideNextBtn.addEventListener('click', function(){ showSlide(slideIndex + 1); resetSlideTimer(); playTone(350, 'sine', 0.08); });
+  resetSlideTimer();
 
 })();

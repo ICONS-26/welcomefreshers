@@ -312,7 +312,14 @@
 <section class="section">
   <div class="eyebrow reveal">Digital Memory Wall</div>
   <h2 class="section-title reveal delay-1">Photos &amp; Moments</h2>
-  <div class="gallery-grid reveal delay-2" id="galleryGrid"></div>
+  <div class="slideshow reveal delay-2" id="photoSlideshow">
+    <div class="slideshow-viewport">
+      <div class="slideshow-track" id="slideshowTrack"></div>
+      <button class="slideshow-arrow prev" id="slidePrev" aria-label="Previous photo">‹</button>
+      <button class="slideshow-arrow next" id="slideNext" aria-label="Next photo">›</button>
+    </div>
+    <div class="slideshow-dots" id="slideDots"></div>
+  </div>
 </section>
 
 <!-- RULES & CONDUCT -->
@@ -347,16 +354,6 @@
   <p class="section-sub" style="margin:16px auto 32px;">Let's build memories, technical skills, and a bright engineering future together.</p>
   <a href="#games" class="btn">Play a Game &amp; Earn XP</a>
 </section>
-
-<!-- LIGHTBOX DIALOG -->
-<dialog id="lightboxDialog">
-  <div class="lightbox-content">
-    <button class="lightbox-close" id="closeLightboxBtn" aria-label="Close dialog">&times;</button>
-    <div class="lightbox-media" id="lightboxEmoji">🎬</div>
-    <div class="lightbox-title" id="lightboxTitle">Event Title</div>
-    <div class="lightbox-desc" id="lightboxDesc">Description goes here...</div>
-  </div>
-</dialog>
 
 <footer>
   ICONS · NSS College of Engineering, Palakkad · Instrumentation &amp; Control Engineering<br>

@@ -343,27 +343,38 @@ nav {
 .t-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(244, 236, 251, 0.2); cursor: pointer; border: none; transition: background .3s, width .3s; }
 .t-dot.active { background: var(--gold); width: 24px; border-radius: 99px; }
 
-/* GALLERY */
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; margin-top: 30px; }
-.gallery-item { aspect-ratio: 1/1; border-radius: 12px; background: linear-gradient(160deg, var(--bg-card-alt), var(--bg-card)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; border: 1px solid var(--glass-border); cursor: pointer; transition: transform .3s ease, border-color .3s; font-size: 1.8rem; box-shadow: var(--shadow-card); }
-.gallery-item span { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.05em; }
-.gallery-item:hover { transform: scale(1.05); border-color: var(--gold); z-index: 2; }
-
-/* LIGHTBOX DIALOG */
-#lightboxDialog {
-  background: transparent; border: none; padding: 0; max-width: 90vw; width: 680px; margin: auto;
-  backdrop-filter: blur(16px);
+/* PHOTO SLIDESHOW (stacked deck) */
+.slideshow { margin-top: 30px; }
+.slideshow-viewport {
+  position: relative; width: 100%; max-width: 720px; margin: 0 auto; aspect-ratio: 4/3;
+  overflow: hidden;
 }
-#lightboxDialog::backdrop { background: rgba(15, 8, 24, 0.85); backdrop-filter: blur(8px); }
-.lightbox-content {
-  background: var(--bg-card); border: 1.5px solid var(--gold); border-radius: 16px;
-  padding: 32px; position: relative; color: var(--ink); text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+.slide {
+  position: absolute; inset: 0; margin: auto; width: 84%; height: 88%;
+  border-radius: 16px; overflow: hidden; background: #0c0612;
+  border: 1px solid var(--glass-border); box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+  opacity: 0; z-index: 0; pointer-events: none;
+  transform: translateX(0) scale(1);
+  transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .55s ease;
 }
-.lightbox-close { position: absolute; top: 16px; right: 20px; background: transparent; border: none; font-size: 1.8rem; color: var(--ink-dim); cursor: pointer; }
-.lightbox-close:hover { color: var(--gold); }
-.lightbox-media { font-size: 4.5rem; margin: 20px 0; }
-.lightbox-title { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 10px; color: var(--gold); }
-.lightbox-desc { color: var(--ink-dim); font-size: 1rem; line-height: 1.6; max-width: 500px; margin: 0 auto; }
+.slide.current { opacity: 1; z-index: 3; transform: translateX(0) scale(1); pointer-events: auto; }
+.slide.next { opacity: .95; z-index: 2; transform: translateX(9%) scale(0.92); }
+.slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; background: #0c0612; }
+.slide-tag {
+  position: absolute; top: 14px; left: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+  background: rgba(0,0,0,0.55); padding: 5px 12px; border-radius: 99px; color: var(--gold); backdrop-filter: blur(4px); z-index: 2;
+}
+.slideshow-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(0,0,0,0.5); color: #fff; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background .2s; z-index: 4;
+}
+.slideshow-arrow:hover { background: rgba(0,0,0,0.75); }
+.slideshow-arrow.prev { left: 4px; }
+.slideshow-arrow.next { right: 4px; }
+.slideshow-dots { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.slide-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(244, 236, 251, 0.2); cursor: pointer; border: none; transition: background .3s, width .3s; }
+.slide-dot.active { background: var(--gold); width: 24px; border-radius: 99px; }
 
 /* RULES */
 .rules-card { background: linear-gradient(160deg, var(--bg-card-alt), var(--bg-main)); border: 1px solid rgba(255, 107, 91, 0.3); border-radius: 16px; padding: clamp(28px, 5vw, 52px); margin-top: 30px; box-shadow: var(--shadow-card); }
