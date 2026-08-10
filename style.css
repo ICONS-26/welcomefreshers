@@ -376,13 +376,6 @@ nav {
 .slide-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(244, 236, 251, 0.2); cursor: pointer; border: none; transition: background .3s, width .3s; }
 .slide-dot.active { background: var(--gold); width: 24px; border-radius: 99px; }
 
-/* MEET THE ICONS */
-.meet-icons-panel {
-  margin: 30px auto 0; max-width: 900px; border-radius: 16px; overflow: hidden;
-  border: 1px solid var(--glass-border); box-shadow: var(--shadow-card); background: var(--bg-card);
-}
-.meet-icons-panel img { width: 100%; height: auto; display: block; }
-
 /* RULES */
 .rules-card { background: linear-gradient(160deg, var(--bg-card-alt), var(--bg-main)); border: 1px solid rgba(255, 107, 91, 0.3); border-radius: 16px; padding: clamp(28px, 5vw, 52px); margin-top: 30px; box-shadow: var(--shadow-card); }
 .rules-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 24px; }
@@ -406,6 +399,7 @@ nav {
   background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
   display: flex; align-items: center; justify-content: center;
 }
+.social-icon.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
 .social-icon svg { width: 22px; height: 22px; }
 .social-text { text-align: left; }
 .social-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); }

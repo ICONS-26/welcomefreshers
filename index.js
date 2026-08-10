@@ -701,75 +701,97 @@
   }
   resetTimer();
 
-  /* ============ PHOTO SLIDESHOW ============ */
-  var slidePhotos = [
-    {src: 'img/achievements/indumiss.jpeg', tag: 'Achievements'},
-    {src: 'img/achievements/iv25.jpg', tag: 'Achievements'},
-    {src: 'img/achievements/logomaking.jpg', tag: 'Achievements'},
-    {src: 'img/achievements/placement.jpeg', tag: 'Achievements'},
-    {src: 'img/achievements/quizwinners.jpeg', tag: 'Achievements'},
-    {src: 'img/achievements/spiwebinar.jpg', tag: 'Achievements'},
-    {src: 'img/druva/beyondthepulseimage.jpg', tag: 'Druva'},
-    {src: 'img/druva/beyondthepulseposter.jpg', tag: 'Druva'},
-    {src: 'img/druva/brainbattle.jpg', tag: 'Druva'},
-    {src: 'img/druva/druvatalk.jpg', tag: 'Druva'},
-    {src: 'img/druva/druvateam25.jpg', tag: 'Druva'},
-    {src: 'img/druva/iconscupposter.jpg', tag: 'Druva'},
-    {src: 'img/druva/iconscupwinners.jpeg', tag: 'Druva'},
-    {src: 'img/druva/microcontroller_workshop.jpg', tag: 'Druva'},
-    {src: 'img/druva/rudraimage.jpg', tag: 'Druva'},
-    {src: 'img/druva/rudraposter.jpg', tag: 'Druva'}
-  ];
+  /* ============ SLIDESHOW (reusable stacked deck) ============ */
+  function createSlideshow(opts){
+    var track = document.getElementById(opts.trackId);
+    var dotsWrap = document.getElementById(opts.dotsId);
+    var prevBtn = document.getElementById(opts.prevId);
+    var nextBtn = document.getElementById(opts.nextId);
+    var index = 0, timer;
 
-  var slideshowTrack = document.getElementById('slideshowTrack');
-  var slideDotsWrap = document.getElementById('slideDots');
-  var slidePrevBtn = document.getElementById('slidePrev');
-  var slideNextBtn = document.getElementById('slideNext');
-  var slideIndex = 0, slideTimer;
+    opts.items.forEach(function(item, i){
+      var slide = document.createElement('div');
+      slide.className = 'slide';
 
-  slidePhotos.forEach(function(p, i){
-    var slide = document.createElement('div');
-    slide.className = 'slide';
+      if(item.tag){
+        var tag = document.createElement('span');
+        tag.className = 'slide-tag';
+        tag.textContent = item.tag;
+        slide.appendChild(tag);
+      }
 
-    var tag = document.createElement('span');
-    tag.className = 'slide-tag';
-    tag.textContent = p.tag;
+      var img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.alt || '';
+      img.loading = 'lazy';
+      slide.appendChild(img);
 
-    var img = document.createElement('img');
-    img.src = p.src;
-    img.alt = p.tag + ' photo';
-    img.loading = 'lazy';
+      track.appendChild(slide);
 
-    slide.appendChild(tag);
-    slide.appendChild(img);
-    slideshowTrack.appendChild(slide);
+      var dot = document.createElement('button');
+      dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
+      dot.addEventListener('click', function(){ show(i); resetTimer(); });
+      dotsWrap.appendChild(dot);
+    });
 
-    var dot = document.createElement('button');
-    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
-    dot.addEventListener('click', function(){ showSlide(i); resetSlideTimer(); });
-    slideDotsWrap.appendChild(dot);
+    var slideEls = track.querySelectorAll('.slide');
+    var dots = dotsWrap.querySelectorAll('.slide-dot');
+
+    function show(i){
+      index = (i + slideEls.length) % slideEls.length;
+      slideEls.forEach(function(s, idx){
+        var rel = (idx - index + slideEls.length) % slideEls.length;
+        s.classList.toggle('current', rel === 0);
+        s.classList.toggle('next', rel === 1);
+      });
+      dots.forEach(function(d, idx){ d.classList.toggle('active', idx === index); });
+    }
+    function resetTimer(){
+      clearInterval(timer);
+      timer = setInterval(function(){ show(index + 1); }, opts.interval || 7000);
+    }
+    prevBtn.addEventListener('click', function(){ show(index - 1); resetTimer(); playTone(350, 'sine', 0.08); });
+    nextBtn.addEventListener('click', function(){ show(index + 1); resetTimer(); playTone(350, 'sine', 0.08); });
+    show(0);
+    resetTimer();
+  }
+
+  createSlideshow({
+    trackId: 'slideshowTrack', dotsId: 'slideDots', prevId: 'slidePrev', nextId: 'slideNext',
+    interval: 7000,
+    items: [
+      {src: 'img/achievements/indumiss.jpeg', tag: 'Achievements', alt: 'Achievements photo'},
+      {src: 'img/achievements/iv25.jpg', tag: 'Achievements', alt: 'Achievements photo'},
+      {src: 'img/achievements/logomaking.jpg', tag: 'Achievements', alt: 'Achievements photo'},
+      {src: 'img/achievements/placement.jpeg', tag: 'Achievements', alt: 'Achievements photo'},
+      {src: 'img/achievements/quizwinners.jpeg', tag: 'Achievements', alt: 'Achievements photo'},
+      {src: 'img/achievements/spiwebinar.jpg', tag: 'Achievements', alt: 'Achievements photo'},
+      {src: 'img/druva/beyondthepulseimage.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/beyondthepulseposter.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/brainbattle.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/druvatalk.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/druvateam25.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/iconscupposter.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/iconscupwinners.jpeg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/microcontroller_workshop.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/rudraimage.jpg', tag: 'Druva', alt: 'Druva photo'},
+      {src: 'img/druva/rudraposter.jpg', tag: 'Druva', alt: 'Druva photo'}
+    ]
   });
 
-  var slideEls = slideshowTrack.querySelectorAll('.slide');
-  var slideDots = slideDotsWrap.querySelectorAll('.slide-dot');
-
-  function showSlide(i){
-    slideIndex = (i + slideEls.length) % slideEls.length;
-    slideEls.forEach(function(s, idx){
-      var rel = (idx - slideIndex + slideEls.length) % slideEls.length;
-      s.classList.toggle('current', rel === 0);
-      s.classList.toggle('next', rel === 1);
-    });
-    slideDots.forEach(function(d, idx){ d.classList.toggle('active', idx === slideIndex); });
-  }
-  showSlide(0);
-  function resetSlideTimer(){
-    clearInterval(slideTimer);
-    slideTimer = setInterval(function(){ showSlide(slideIndex + 1); }, 7000);
-  }
-  slidePrevBtn.addEventListener('click', function(){ showSlide(slideIndex - 1); resetSlideTimer(); playTone(350, 'sine', 0.08); });
-  slideNextBtn.addEventListener('click', function(){ showSlide(slideIndex + 1); resetSlideTimer(); playTone(350, 'sine', 0.08); });
-  resetSlideTimer();
+  createSlideshow({
+    trackId: 'iconsSlideshowTrack', dotsId: 'iconsSlideDots', prevId: 'iconsSlidePrev', nextId: 'iconsSlideNext',
+    interval: 7000,
+    items: [
+      {src: 'img/panel/icons_panel.png', alt: 'ICONS panel'},
+      {src: 'img/panel/sub1.png', alt: 'ICONS panel photo 1'},
+      {src: 'img/panel/sub2.png', alt: 'ICONS panel photo 2'},
+      {src: 'img/panel/sub3.png', alt: 'ICONS panel photo 3'},
+      {src: 'img/panel/sub4.png', alt: 'ICONS panel photo 4'},
+      {src: 'img/panel/sub5.png', alt: 'ICONS panel photo 5'},
+      {src: 'img/panel/sub6.png', alt: 'ICONS panel photo 6'}
+    ]
+  });
 
 })();
