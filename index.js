@@ -790,7 +790,8 @@
       {src: 'img/panel/sub3.png', alt: 'ICONS panel photo 3'},
       {src: 'img/panel/sub4.png', alt: 'ICONS panel photo 4'},
       {src: 'img/panel/sub5.png', alt: 'ICONS panel photo 5'},
-      {src: 'img/panel/sub6.png', alt: 'ICONS panel photo 6'}
+      {src: 'img/panel/sub6.png', alt: 'ICONS panel photo 6'},
+      {src: 'img/panel/sub7.png', alt: 'ICONS panel photo 7'}
     ]
   });
 
